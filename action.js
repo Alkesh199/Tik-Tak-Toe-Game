@@ -21,7 +21,8 @@ function mainFunction(){
                     ];
 
 
-
+    var circle_img = '<img src="circle.png" id="circle-img"></img>';
+    var cross_img = '<img src ="cross.png" id ="cross-img"></img>';
     var win_flag = false;
     var flexDiv = document.getElementById("game-field");
     var flagSpanEle  = document.getElementById("player-turn-value");
@@ -40,7 +41,8 @@ function mainFunction(){
       player2pos = [];
 
     }
-
+    
+     
 
     function divClickAction(event){
         console.log(event.target.innerHTML);
@@ -49,17 +51,18 @@ function mainFunction(){
         //check if div already aving some inner tml or not
         console.log(event.target.id);
         let target_id = event.target.id;
-        if(event.target.innerHTML!="X" && event.target.innerHTML!="O"){
+        let arr_ind = parseInt(target_id.charAt(target_id.length-1))-1;
+        if(isPositionEmpty(arr_ind)){
           if(flag_turn == 1){
-            event.target.innerHTML="X";
-            player1pos[parseInt(target_id.charAt(target_id.length-1))-1]=true;   
+            event.target.innerHTML=cross_img;
+            player1pos[arr_ind]=true;   
           }
           else{
-            event.target.innerHTML="O";
-            player2pos[parseInt(target_id.charAt(target_id.length-1))-1]=true;
+            event.target.innerHTML=circle_img;
+            player2pos[arr_ind]=true;
           }
        
-          setTimeout(checkWinOrNot,700);
+          setTimeout(checkWinOrNot,200);
           setTimeout(function(){
             if(win_flag){
                 alert(`player ${flag_turn} win`);
@@ -67,7 +70,7 @@ function mainFunction(){
               else{
                 updateFlagTurnValue();
               }
-          },800);
+          },300);
           
         }
 
@@ -110,5 +113,9 @@ function mainFunction(){
        
         console.log(`player ${flag_turn} turn`);
         flagSpanEle.innerHTML=flag_turn;
+    }
+
+    function isPositionEmpty(arr_ind){
+     return (player1pos[arr_ind]!=true || player2pos[arr_ind]!=true);
     }
 }
