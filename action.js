@@ -19,10 +19,14 @@ function mainFunction(){
                       [0,4,8],
                       [2,4,6]
                     ];
+    var resObj = 
+               {
+                win_flag:false,
+                count:0
+                 };
 
-
-    var circle_img = '<img src="circle.png" id="circle-img"></img>';
-    var cross_img = '<img src ="cross.png" id ="cross-img"></img>';
+    var circle_img = '<img src="circle.png" class="fill-box-img" id="circle-img"></img>';
+    var cross_img = '<img src ="cross.png" class="fill-box-img" id ="cross-img"></img>';
     var win_flag = false;
     var flexDiv = document.getElementById("game-field");
     var flagSpanEle  = document.getElementById("player-turn-value");
@@ -53,9 +57,11 @@ function mainFunction(){
         let target_id = event.target.id;
         let arr_ind = parseInt(target_id.charAt(target_id.length-1))-1;
         if(isPositionEmpty(arr_ind)){
+            resObj.count+=1;
           if(flag_turn == 1){
             event.target.innerHTML=cross_img;
-            player1pos[arr_ind]=true;   
+            player1pos[arr_ind]=true; 
+              
           }
           else{
             event.target.innerHTML=circle_img;
@@ -64,11 +70,31 @@ function mainFunction(){
        
           setTimeout(checkWinOrNot,200);
           setTimeout(function(){
-            if(win_flag){
-                alert(`player ${flag_turn} win`);
+            if(resObj.win_flag){
+                //alert(`player ${flag_turn} win`);
+            
+                document.getElementById("popup-div").style.visibility="visible";
+            
+                document.getElementById("winner-data").innerHTML=`player ${flag_turn} won, please refresh window to play again`;
+                resObj = {
+                win_flag:false,
+                count:0
+                 };
+
               }
               else{
+                if(resObj.win_flag==false && resObj.count==9){
+                    document.getElementById("popup-div").style.visibility="visible";
+                    document.getElementById("winner-data").innerHTML="Match Tied, please refresh window to play again";
+                    document.getElementById("gif-img").setAttribute("src","oh-no.gif");
+                    resObj = {
+                        win_flag:false,
+                        count:0
+                    };
+
+                }
                 updateFlagTurnValue();
+
               }
           },300);
           
@@ -85,17 +111,19 @@ function mainFunction(){
             
            if(player1pos[winningPos[i][0]]==true && player1pos[winningPos[i][1]] && player1pos[winningPos[i][2]])
            {
-                win_flag=true;
+                resObj.win_flag=true;
                 player_won = 1;
                 break;
             }
             else if(player2pos[winningPos[i][0]]==true && player2pos[winningPos[i][1]] && player2pos[winningPos[i][2]]){
-                win_flag=true;
+                resObj.win_flag=true;
                 player_won = 2;
                 break;
             }
             else{
-                win_flag=false;
+
+                resObj.win_flag=false;
+            
             }
         }
        

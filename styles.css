@@ -1,14 +1,19 @@
 
-
+body{
+    background-color: black;
+}
 
 .main-container{
-background-color: rgb(116, 107, 107);
+background-color: #ccff99;
 width:600px;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-margin:0 auto;
+margin:80px auto;
+border: 10px solid #860052;
+    border-radius: 20px;
+
 }
 
 .heading-text,.player-turn-text
@@ -19,7 +24,7 @@ margin:0 auto;
 }
 
 .heading-div{
-    border-bottom:2px solid rgb(89, 34, 110);
+    border-bottom:2px solid #860052;
     width: 100%;
 }
 
@@ -36,12 +41,13 @@ margin:0 auto;
  display: grid;
  grid-template-columns: 33% 33% 33%;
  height:300px;
+ margin-top:30px;
 }
 
 
 .grid-item{
     background-color:white;
-    border:2px solid rgb(89, 34, 110);
+    border:2px solid #860052;
     width:94px;
     height:94px;
 }
@@ -62,7 +68,39 @@ border:2px solid white;
 border-radius: 3px;
 }
 
-img{
+.fill-box-img{
     width: 94px;
     height:94px;
+}
+
+
+#popup-div{
+   border:5px solid red;
+   background-color: wheat;
+   text-align: center;
+   width: 35%;
+   margin: 0 auto;
+   height:370px;
+   border-radius: 15px;
+   position: fixed;
+   top:200px;
+   left:32%;
+   z-index:100;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   
+}
+
+.make-invisible{
+    visibility:hidden;
+}
+
+.pop-up-p{
+    font-size:30px;
+    padding : 0px 20px;
+}
+#popup-div img{
+    width:80%;
 }
