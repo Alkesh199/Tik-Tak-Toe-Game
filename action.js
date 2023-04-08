@@ -74,7 +74,8 @@ function mainFunction(){
                 //alert(`player ${flag_turn} win`);
             
                 document.getElementById("popup-div").style.visibility="visible";
-            
+                document.getElementById("game-field").removeAttribute('onclick');
+                flexDiv.removeEventListener("click",divClickAction);
                 document.getElementById("winner-data").innerHTML=`player ${flag_turn} won, please refresh window to play again`;
                 resObj = {
                 win_flag:false,
